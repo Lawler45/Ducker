@@ -37,4 +37,25 @@ let contentBeforeDuck = "";
 
 function drawGrid() {
   grid.innerHTML = "";
+
+  gridMatrix.forEach(function (gridRow, gridRowIndex) {
+    gridRow.forEach(function (cellContent, cellContentIndex) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+
+      if (riverRows.includes(gridRowIndex)) {
+        cell.classList.add("river");
+      } else if (roadRows.includes(gridRowIndex)) {
+        cell.classList.add("road");
+      }
+
+      if (cellContent) {
+        cell.classList.add(cellContent);
+      }
+
+      grid.appendChild(cell);
+    });
+  });
 }
+
+drawGrid();
