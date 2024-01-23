@@ -34,6 +34,7 @@ const riverRows = [1, 2];
 const roadRows = [4, 5, 6];
 const duckPosition = { x: 4, y: 8 };
 let contentBeforeDuck = "";
+let time = 15;
 
 function drawGrid() {
   grid.innerHTML = "";
@@ -116,6 +117,25 @@ function animateGame() {
   moveRight(6);
 }
 
+// Win/Loss logic
+function endGame() {
+  clearInterval(countdownLoop);
+  clearInterval(renderLoop);
+
+  document.removeEventListener("keyup", moveDuck);
+  endGameScreen.classList.remove("hidden");
+}
+
+function countdown() {
+  if (time !== 0) {
+    time--;
+    timer.innerText = time.toString().padStart(5, "0");
+  }
+  if (time === 0) {
+    endGame();
+  }
+}
+
 //Rendering
 function render() {
   placeDuck();
@@ -127,6 +147,8 @@ const renderLoop = setInterval(function () {
   animateGame();
   render();
 }, 600);
+
+const countdownLoop = setInterval(countdown, 1000);
 
 //Event listeners
 document.addEventListener("keyup", moveDuck);
