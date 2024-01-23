@@ -58,4 +58,9 @@ function drawGrid() {
   });
 }
 
+function placeDuck() {
+  contentBeforeDuck = gridMatrix[duckPosition.y][duckPosition.x];
+  gridMatrix[duckPosition.y][duckPosition.x] = "duck";
+}
+placeDuck();
 drawGrid();
