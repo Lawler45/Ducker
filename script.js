@@ -63,9 +63,37 @@ function placeDuck() {
   gridMatrix[duckPosition.y][duckPosition.x] = "duck";
 }
 
+function moveDuck(event) {
+  const key = event.key;
+  gridMatrix[duckPosition.y][duckPosition.x] = contentBeforeDuck;
+
+  switch (key) {
+    case "ArrowUp":
+      if (duckPosition.y > 0) duckPosition.y--;
+      break;
+    case "ArrowDown":
+      if (duckPosition.y < 8) duckPosition.y++;
+      break;
+    case "ArrowLeft":
+      if (duckPosition.x > 0) duckPosition.x--;
+      break;
+    case "ArrowRight":
+      if (duckPosition.x < 8) duckPosition.x++;
+      break;
+  }
+
+  render();
+}
+
 function render() {
   placeDuck();
   drawGrid();
 }
 
-const renderLoop = setInterval(render, 600);
+const renderLoop = setInterval(function () {
+  gridMatrix[duckPosition.y][duckPosition.x] = contentBeforeDuck;
+    render()
+}, 600);
+
+//Event listeners
+document.addEventListener("keyup", moveDuck);
