@@ -62,5 +62,10 @@ function placeDuck() {
   contentBeforeDuck = gridMatrix[duckPosition.y][duckPosition.x];
   gridMatrix[duckPosition.y][duckPosition.x] = "duck";
 }
-placeDuck();
-drawGrid();
+
+function render() {
+  placeDuck();
+  drawGrid();
+}
+
+const renderLoop = setInterval(render, 600);
