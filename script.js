@@ -73,16 +73,16 @@ function moveDuck(event) {
     case "W":
       if (duckPosition.y > 0) duckPosition.y--;
       break;
-      case "ARROWDOWN":
-        case "S":
+    case "ARROWDOWN":
+    case "S":
       if (duckPosition.y < 8) duckPosition.y++;
       break;
-      case "ARROWLEFT":
-        case "A":
+    case "ARROWLEFT":
+    case "A":
       if (duckPosition.x > 0) duckPosition.x--;
       break;
-      case "ARROWRIGHT":
-        case "D":
+    case "ARROWRIGHT":
+    case "D":
       if (duckPosition.x < 8) duckPosition.x++;
       break;
   }
@@ -90,6 +90,33 @@ function moveDuck(event) {
   render();
 }
 
+//Animation functions
+function moveRight(gridRowIndex) {
+  const currentRow = gridMatrix[gridRowIndex];
+
+  const lastElement = currentRow.pop();
+  currentRow.unshift(lastElement);
+}
+
+function moveLeft(gridRowIndex) {
+  const currentRow = gridMatrix[gridRowIndex];
+
+  const firstElement = currentRow.shift();
+  currentRow.push(firstElement);
+}
+
+function animateGame() {
+  //River
+  moveRight(1);
+  moveLeft(2);
+
+  //Road
+  moveRight(4);
+  moveRight(5);
+  moveRight(6);
+}
+
+//Rendering
 function render() {
   placeDuck();
   drawGrid();
@@ -97,6 +124,7 @@ function render() {
 
 const renderLoop = setInterval(function () {
   gridMatrix[duckPosition.y][duckPosition.x] = contentBeforeDuck;
+  animateGame();
   render();
 }, 600);
 
