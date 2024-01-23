@@ -63,21 +63,26 @@ function placeDuck() {
   gridMatrix[duckPosition.y][duckPosition.x] = "duck";
 }
 
+//Arrows or "WASD"
 function moveDuck(event) {
   const key = event.key;
   gridMatrix[duckPosition.y][duckPosition.x] = contentBeforeDuck;
 
-  switch (key) {
-    case "ArrowUp":
+  switch (key.toUpperCase()) {
+    case "ARROWUP":
+    case "W":
       if (duckPosition.y > 0) duckPosition.y--;
       break;
-    case "ArrowDown":
+      case "ARROWDOWN":
+        case "S":
       if (duckPosition.y < 8) duckPosition.y++;
       break;
-    case "ArrowLeft":
+      case "ARROWLEFT":
+        case "A":
       if (duckPosition.x > 0) duckPosition.x--;
       break;
-    case "ArrowRight":
+      case "ARROWRIGHT":
+        case "D":
       if (duckPosition.x < 8) duckPosition.x++;
       break;
   }
@@ -92,7 +97,7 @@ function render() {
 
 const renderLoop = setInterval(function () {
   gridMatrix[duckPosition.y][duckPosition.x] = contentBeforeDuck;
-    render()
+  render();
 }, 600);
 
 //Event listeners
